@@ -1,0 +1,58 @@
+\documentclass[a4paper]{article}
+
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage[colorinlistoftodos]{todonotes}
+\usepackage{fancyhdr}
+
+\fancypagestyle{plain}{%
+\fancyhf{}
+\fancyhead[LO,RE]{\sffamily\bfseries\large}
+\fancyhead[RO,LE]{\sffamily\bfseries\large }
+\fancyfoot[LO,RE]{\sffamily\bfseries\large }
+\fancyfoot[RO,LE]{\sffamily\bfseries\thepage}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[RO,LE]{\sffamily\bfseries\large Grid and Cloud Computing}
+\fancyhead[LO,RE]{\sffamily\bfseries\large Paper review -number of paper-}
+\fancyfoot[LO,RE]{\sffamily\bfseries\large }
+\fancyfoot[RO,LE]{\sffamily\bfseries\thepage}
+\renewcommand{\headrulewidth}{1pt}
+\renewcommand{\footrulewidth}{0pt}
+
+\newcommand{\paper}{- Insert paper name -}
+
+\title{Grid and Cloud Computing \\ \paper}
+
+\author{Nicky Advokaat, Tim van Dalen}
+
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+In this paper we will review the paper \paper \cite{thepaper}.  
+\end{abstract}
+
+\section{Section}
+Bla.
+
+\begin{thebibliography}{9}
+
+\bibitem{thepaper}
+  Authors,
+  \emph{\paper},
+  platform, year.
+
+ 
+\end{thebibliography}
+
+\end{document}
