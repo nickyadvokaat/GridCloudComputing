@@ -42,8 +42,25 @@
 In this paper we will review the paper \paper \cite{thepaper}.  
 \end{abstract}
 
-\section{Section}
-Bla.
+\section{Abstract of the paper}
+	The paper describes Haystack, a new architecture/infrastructure setup that Facebook is using to store their users' photos.
+	Haystack improves on the old system by reducing the number of I/O lookups needed to process a single photo request.
+	The authors explain why content delivery networks are not very useful in solving this problem.
+	Haystack consists of three major components: the directory, the cache and the store.
+
+\section{Main strenghts}
+  \begin{itemize}
+	  \item With Facebook's growth, such a system is definitely needed. Since the paper was published, the estimated number of photos uploaded to Facebook has gone from 1 billion to 2.5 billion per week.
+	  \item The paper shows solid experiments.
+    \item Since photos are very important to Facebook's business, we know the authors were really driven to design a good system.
+	  \item Haystack is in use today. The theoretical aspects in the paper are put to the test every day.
+  \end{itemize}
+
+\section{Main weaknesses}
+	\begin{itemize}
+	  \item While the system is explained well, most details are proprietary, so it's hard to reproduce the paper.
+	  \item The same goes for the comparison with the old system.
+	\end{itemize}
 
 \begin{thebibliography}{9}
 
