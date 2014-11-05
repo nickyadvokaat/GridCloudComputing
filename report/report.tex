@@ -104,7 +104,7 @@
 
 \lettrine[nindent=0em,lines=3]{O}ur customer WantCloud BV wants to develop an application in which users can solve Sudoku puzzles. One feature is the automatic completion of a partially filled in puzzle. To lower the client side workload this computation is performed on a remote server, our task is to create this server side application. The traditional approach is to buy server hardware and host the application on it. However this is time consuming, expensive, and scaling demands extra effort. Therefore such services are nowadays hosted on cloud computing services such as Infrastructure as a Service (IaaS) in which provides virtual machines that can be dynamically allocated. So our problem can be defined as: how do we create a fast, reliable, elastic Sudoku solving application on an IaaS service?
 
-Todo: the existing systems and/or tools (related work)
+Existing systems use platforms like Amazon EC2\cite{ec2}, Microsoft Azure\cite{azure} or Google Compute Engine\cite{google}. Usually elasticity is provided through an API by which developers can measure workload and provision computational power. There are also services that can do this automatically such as Amazon Elastic Load Balancing. 
 
 Our solution to the problem described is \appName, a fast and reliable cloud based Sudoku solver running on Amazon EC2\cite{ec2}. 
 \appName features one main server to which all request are made, and a variable number of solver machines over which the jobs are distributed. \appName provides elasticity by automatically provisioning solver machine VM's according to workload, and is resistant to system failures of solver machines.
@@ -114,14 +114,25 @@ The remainder of this article is structured as follows. Section 2 describes the 
 %------------------------------------------------
 
 \section{Background on Application}
-Background on Application (recommended size: 0.5 pages): describe the application (1 paragraph) and its requirements (1-3 paragraphs, summarized in a table if needed).
-\includegraphics[width=0.5\textwidth]{img/arch}
 
+Our application is a service to which a HTTP request can be made containing a Sudoku puzzle that is partially filled in, after which it returns a completely filled in Sudoku. The request is a sequence of 81 digits (9 rows by 9 columns), where 1-9 are Sudoku values and 0 means empty. 
 
+\appName has the following requirements.
+\begin{itemize}
+\item It must be fast and responsive, the end user may suffer a delay of at most a couple of seconds.
+\item Automatic, the system will be running without human intervention as much as possible.
+\item It must provide elasticity, meaning it automatically provisions virtual machines according to the workload.
+\item Request made to the system must be equally distributed over virtual machines. The system will have a load balancer to ensure this.
+\item It must be reliable, we take into consideration that individual machines might fail and take precautions to recover.
+\item Resource usage and performance of the system must be recorded en be observable to system administrators.
+\end{itemize}
 
 %------------------------------------------------
 
 \section{System Design}
+
+\includegraphics[width=0.5\textwidth]{img/arch}
+
 System Design (recommended size: 1.5 pages)
 \begin{enumerate}[(a)]
 \item Resource Management Architecture: describe the design of your system,
@@ -171,6 +182,12 @@ Discussion (recommended size: 1 page): summarize the main findings of your work 
 
 \bibitem{ec2}
 Amazon EC2, http://aws.amazon.com/ec2/
+
+\bibitem{azure}
+Microsoft Azure, http://azure.microsoft.com
+
+\bibitem{google}
+Google Compute Engine, http://cloud.google.com/compute
 
 \end{thebibliography}
 
