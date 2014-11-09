@@ -60,6 +60,7 @@
 			The end-user does not notice this (aside from the higher-than-normal processing time).
 		
 		\paragraph{Accounting}
+			\label{sys:arch:load:cleanup}
 			Every 30 seconds, the cleanup task is run.
 			This task removes the workload of each application server by the amount of work a typical application server (all instances are \textit{t1.micro}) can solve in 30 seconds, a parameter to the load balancer.
 			
@@ -70,7 +71,7 @@
 			
 			\begin{description}
 				\item[Start:] $\textnormal{total\_load} > \#\textnormal{instances} * \textnormal{typical\_load} \lor \#\textnormal{instances} < 2$
-				\item[Terminate:] $\textnormal{total\_load} < (\#\textnormal{instances} + 1) * \textnormal{typical\_load} \land \#\textnormal{instances} > 2$
+				\item[Terminate:] $\textnormal{total\_load} < (\#\textnormal{instances} - 1) * \textnormal{typical\_load} \land \#\textnormal{instances} > 2$
 			\end{description}
 			
 			We use the Amazon \textit{aws-sdk} Ruby library to connect to AWS.
@@ -91,4 +92,14 @@
 			We use this end-point to verify that the system will scale up the number of application server machines under load.
 
 \subsection{System Policies}
+	The system adheres to the following policies.
+
+	\begin{itemize}
+		\item The load balancer forwards requests to the application server with the lowest load.
+		\item If an application server does not respond in time to a request from the load balancer, then that server will be removed from the pool and the request will be forwarded to another server.
+		\item An application server only accepts request from the load balancer.
+		\item If the load balancer does not receive a ping message from a certain application server within 5 minutes, that server will be removed from the pool.
+		\item The load balancer starts a new application server when the total load is higher than what all servers in the pool can handle (See Paragraph~\ref{sys:arch:load:cleanup} for details).
+		\item The load balancer terminates an application server when the total load is lower than what all servers minus one in the pool can handle (See Paragraph~\ref{sys:arch:load:cleanup} for details).
+	\end{itemize}
 	
