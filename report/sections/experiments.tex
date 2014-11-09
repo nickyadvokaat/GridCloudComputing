@@ -26,17 +26,19 @@ It contains a large list of partially completed puzzles. Within random intervals
 The workload program is multithreaded to allow new requests to be made while others are still active.
 Alongside the workload generation there is a monitoring thread which inspects and logs data from the load balancer such as the number of active machines and resource usage.
 
-Experimenten, de system features moeten getest worden:
+Figure~\ref{fig:asdf} shows the workload and the number of solver machines over a period of time. Machines allocated when the workload is high, and they are terminated when it drops. 
 
-\begin{itemize}
-	\item Elastic: grafiek dat van \#machines en workload over tijd, lat zien meer work -> meer machines
-	\item Response time: de user hoeft nooit lang te wachten
-	\item Meerdere machines en dan plots van de workloads voor load balancing. Dat we laten zien dat het goed verdeeld word.
-	\item Reliable. Weet niet wat voor experiment we hier voor willen doen
-\end{itemize}
+\begin{figure}[H]
+	\includegraphics[width=\linewidth]{load_and_machines}
+	\caption{The workload(blue) and the number of machines(green) plotted over time}
+	\label{fig:asdf}
+\end{figure}
+
+
+Figure~\ref{fig:exp:response} shows the distribution of the response time the end user experiences when making a request. Data for this experiment was gathered during varying workload. It shows that although there is some variation, the delay is always less than 60 milliseconds.
 
 \begin{figure}[H]
 	\includegraphics[width=\linewidth]{hist_response_time}
-	\caption{Distribution of the response time of the server, with outliers removed}
+	\caption{Distribution of the response time in milliseconds of the server, with outliers removed}
 	\label{fig:exp:response}
 \end{figure}
