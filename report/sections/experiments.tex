@@ -16,7 +16,7 @@ Experimental Results (recommended size: 1.5 pages)
 	\end{enumerate}
 \end{enumerate}
 
-We evaluate the performance of \appName by running it on the Amazon EC2 cloud, which provides a web interface through which images for virtual machines can be created, managed, and launched.
+We evaluate the performance of \appName{} by running it on the Amazon EC2 cloud, which provides a web interface through which images for virtual machines can be created, managed, and launched.
 We create one image containing our load balancer and one image containing code for the solver machine.
 We need to launch only the load balancer image, which will launch solver instances on its own depending on workload.
 In the instance overview of the EC2 web interface we can find the IP address of the machines so we can make Sudoku request to the load balancer. 

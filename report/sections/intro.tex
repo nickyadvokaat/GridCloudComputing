@@ -10,9 +10,9 @@ Existing systems use platforms like Amazon EC2\cite{ec2}, Microsoft Azure\cite{a
 Usually elasticity is provided through an API by which developers can measure workload and provision computational power.
 There are also services that can do this automatically such as Amazon Elastic Load Balancing. 
 
-Our solution to the problem described is \appName, a fast and reliable cloud based Sudoku solver running on Amazon EC2\cite{ec2}. 
-\appName features one main server to which all request are made, and a variable number of solver machines over which the jobs are distributed.
-\appName provides elasticity by automatically provisioning solver machine VM's according to workload, and is resistant to system failures of solver machines.
+Our solution to the problem described is \appName{}, a fast and reliable cloud based Sudoku solver running on Amazon EC2\cite{ec2}. 
+\appName{} features one main server to which all request are made, and a variable number of solver machines over which the jobs are distributed.
+\appName{} provides elasticity by automatically provisioning solver machine VM's according to workload, and is resistant to system failures of solver machines.
 
 The remainder of this article is structured as follows.
 Section 2 describes the background of the application and its requirements.
