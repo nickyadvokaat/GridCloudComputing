@@ -48,7 +48,11 @@
 		
 		\paragraph{Balancing}
 			The workload size of a request is defined by $1.3^\textnormal{the number of 0-s in the puzzle}$.
-			TODO: explanation of why we chose this
+			Based on initial tests and knowledge about the application (the use of backtracking), we suspected an exponential relation between the number of zeroes in the request and the processing time.
+			However, we were not able to show a good correlation after we ran an experiment with more data.
+			See Section~\ref{experiments} for the results of this experiment.
+			The constant $1.3$ was found through experimentation and seems to work fairly well.
+			
 			When the load balancer gets a request, it will forward it to the server with the lowest load.
 			Thus, we balance in a greedy way.
 			
