@@ -6,6 +6,7 @@
 *.fls
 *.out
 *.toc
+report/report.pdf
 
 ## Intermediate documents:
 *.dvi
