@@ -1,3 +1,13 @@
 Discussion (recommended size: 1 page): summarize the main findings of your work and discuss the tradeoffs inherent in the design of cloud-computing-based applications.
 Should the WantCloud CTO use IaaS-based clouds?
 Among others, use extrapolation of the results as reported in Section 6.b of the report, to discuss the charged time and the charged cost for 100,000/1,000,000/10,000,000 users and for 1 day/1 month/1 year.
+
+In the current version of the software, only one start and one terminate action is allowed per cleanup.
+Thus, the software will scale machines by maximally two per minute either way.
+Because of this, the reaction of the scaling component can be a bit slow, as can be seen in the results of our experiments.
+To improve this, we can simply allow the load balancer to start or terminate more machines per cleanup.
+This takes a bit more accounting, but should overall not be a big change.
+We did not implement this because it requires some extra tweaking and we simply did not have the time.
+
+Some parameters of the load balancer require some more experimentation or tweaking to perform optimally.
+These are the load definition formula and the load that one machine can handle per 30 seconds.
