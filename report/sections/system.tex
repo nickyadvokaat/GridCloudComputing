@@ -47,7 +47,7 @@
 		\end{itemize}
 		
 		\paragraph{Balancing}
-			The workload size of a request is defined by $1.3^\textnormal{the number of 0-s in the puzzle}$.
+			The workload size of a request for a puzzle S is defined by $1.3^{Z(S)}$ where $Z(S)$ is the number of 0-s in the puzzle S.
 			Based on initial tests and knowledge about the application (the use of backtracking), we suspected an exponential relation between the number of zeroes in the request and the processing time.
 			However, we were not able to show a good correlation after we ran an experiment with more data.
 			See Section~\ref{experiments} for the results of this experiment.
@@ -64,7 +64,7 @@
 			Every 30 seconds, the cleanup task is run.
 			This task removes the workload of each application server by the amount of work a typical application server (all instances are \textit{t1.micro}) can solve in 30 seconds, a parameter to the load balancer.
 			
-			It also removes application servers that have not sent a heart-beat in 5 minutes from the pool.
+			It also removes application servers that have not sent a heart-beat within the last 5 minutes from the pool.
 			
 			Finally, it checks the current server load to see if any new application servers should be started or if any application servers can be terminated.
 			We use the following conditions:
@@ -89,7 +89,7 @@
 			We use this to verify that the load balancer actually balances the load properly.
 			
 			The \textit{/load} end-point gives the number of instances and the current total system load.
-			We use this end-point to verify that the system will scale up the number of application server machines under load.
+			We use this end-point to verify that the system will scale the number of application server machines under varying load.
 
 \subsection{System Policies}
 	The system adheres to the following policies.
