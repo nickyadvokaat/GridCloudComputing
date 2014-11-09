@@ -1,6 +1,17 @@
-Discussion (recommended size: 1 page): summarize the main findings of your work and discuss the tradeoffs inherent in the design of cloud-computing-based applications.
-Should the WantCloud CTO use IaaS-based clouds?
-Among others, use extrapolation of the results as reported in Section 6.b of the report, to discuss the charged time and the charged cost for 100,000/1,000,000/10,000,000 users and for 1 day/1 month/1 year.
+One of the most obvious point we make is that cloud-computing-based applications are inherently more complex than traditional applications.
+Instead of developing just the application itself, the developer also needs to worry about the architecture involved with load balancing and other cloud-based techniques.
+This is, of course, also due to the fact that people have been working with traditional applications for far longer and that we are, as an industry, still figuring out how to develop for distributed systems.
+It seems that Amazon and Google are trying to remove this disadvantage by offering the 'cloud' part of the development in ready-made packages (such as AWS Elastic Beanstalk or Google Appengine), but these will of course not work for all kinds of applications.
+We are curious to see where this development will head.
+
+In our application, it would have been cheaper to rent a VPS for the duration of the project and run one application server on it.
+We suspect this is due to the fact that we aggresively tried to balance a load that was very low, resulting in a lot of instances being created and terminated.
+
+We spent roughly \$6 solving 50000 puzzles, most of them during the day we ran most of our experiments.
+We will not relate this number of puzzles to a number of users.
+If we take this day as the 'average workload' day, running the application on AWS EC2 would cost roughly \$155 per month or \$1800 per year.
+
+For the application we chose, we recommend using a traditional approach, as it seems that a single server is able to provide nearly the same level of service for a fraction of the cost.
 
 In the current version of the software, only one start and one terminate action is allowed per cleanup.
 Thus, the software will scale machines by maximally two per minute either way.
