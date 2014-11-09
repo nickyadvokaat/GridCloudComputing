@@ -1,0 +1,12 @@
+Our application is a service to which a HTTP request can be made containing a Sudoku puzzle that is partially filled in, after which it returns a completely filled in Sudoku.
+The request is a sequence of 81 digits (9 rows by 9 columns), where 1-9 are Sudoku values and 0 means empty. 
+
+\appName has the following requirements.
+\begin{itemize}
+	\item It must be fast and responsive, the end user may suffer a delay of at most a couple of seconds.
+	\item Automatic, the system will be running without human intervention as much as possible.
+	\item It must provide elasticity, meaning it automatically provisions virtual machines according to the workload.
+	\item Request made to the system must be equally distributed over virtual machines. The system will have a load balancer to ensure this.
+	\item It must be reliable, we take into consideration that individual machines might fail and take precautions to recover.
+	\item Resource usage and performance of the system must be recorded en be observable to system administrators.
+\end{itemize}

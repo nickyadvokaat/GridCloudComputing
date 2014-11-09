@@ -1,0 +1,21 @@
+\lettrine[nindent=0em,lines=3]{O}ur customer WantCloud BV wants to develop an application in which users can solve Sudoku puzzles.
+One feature is the automatic completion of a partially filled in puzzle.
+To lower the client side workload this computation is performed on a remote server, our task is to create this server side application.
+The traditional approach is to buy server hardware and host the application on it.
+However this is time consuming, expensive, and scaling demands extra effort.
+Therefore such services are nowadays hosted on cloud computing services such as Infrastructure as a Service (IaaS) in which provides virtual machines that can be dynamically allocated.
+So our problem can be defined as: how do we create a fast, reliable, elastic Sudoku solving application on an IaaS service?
+
+Existing systems use platforms like Amazon EC2\cite{ec2}, Microsoft Azure\cite{azure} or Google Compute Engine\cite{google}.
+Usually elasticity is provided through an API by which developers can measure workload and provision computational power.
+There are also services that can do this automatically such as Amazon Elastic Load Balancing. 
+
+Our solution to the problem described is \appName, a fast and reliable cloud based Sudoku solver running on Amazon EC2\cite{ec2}. 
+\appName features one main server to which all request are made, and a variable number of solver machines over which the jobs are distributed.
+\appName provides elasticity by automatically provisioning solver machine VM's according to workload, and is resistant to system failures of solver machines.
+
+The remainder of this article is structured as follows.
+Section 2 describes the background of the application and its requirements.
+The system design including resource management architecture and system policies are presented in section 3.
+In section 4 we evaluate the performance of our system in production. Section 5 summarizes our main findings and discusses tradeoffs in our design.
+The 6$^{th}$ section concludes this paper. 

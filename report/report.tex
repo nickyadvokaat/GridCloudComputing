@@ -101,91 +101,32 @@
 \begin{multicols}{2} % Two-column layout throughout the main article text
 
 \section{Introduction}
-
-\lettrine[nindent=0em,lines=3]{O}ur customer WantCloud BV wants to develop an application in which users can solve Sudoku puzzles. One feature is the automatic completion of a partially filled in puzzle. To lower the client side workload this computation is performed on a remote server, our task is to create this server side application. The traditional approach is to buy server hardware and host the application on it. However this is time consuming, expensive, and scaling demands extra effort. Therefore such services are nowadays hosted on cloud computing services such as Infrastructure as a Service (IaaS) in which provides virtual machines that can be dynamically allocated. So our problem can be defined as: how do we create a fast, reliable, elastic Sudoku solving application on an IaaS service?
-
-Existing systems use platforms like Amazon EC2\cite{ec2}, Microsoft Azure\cite{azure} or Google Compute Engine\cite{google}. Usually elasticity is provided through an API by which developers can measure workload and provision computational power. There are also services that can do this automatically such as Amazon Elastic Load Balancing. 
-
-Our solution to the problem described is \appName, a fast and reliable cloud based Sudoku solver running on Amazon EC2\cite{ec2}. 
-\appName features one main server to which all request are made, and a variable number of solver machines over which the jobs are distributed. \appName provides elasticity by automatically provisioning solver machine VM's according to workload, and is resistant to system failures of solver machines.
-
-The remainder of this article is structured as follows. Section 2 describes the background of the application and its requirements. The system design including resource management architecture and system policies are presented in section 3. In section 4 we evaluate the performance of our system in production. Section 5 summarizes our main findings and discusses tradeoffs in our design. The 6$^{th}$ section concludes this paper. 
+\input{sections/intro}
 
 %------------------------------------------------
 
 \section{Background on Application}
-
-Our application is a service to which a HTTP request can be made containing a Sudoku puzzle that is partially filled in, after which it returns a completely filled in Sudoku. The request is a sequence of 81 digits (9 rows by 9 columns), where 1-9 are Sudoku values and 0 means empty. 
-
-\appName has the following requirements.
-\begin{itemize}
-\item It must be fast and responsive, the end user may suffer a delay of at most a couple of seconds.
-\item Automatic, the system will be running without human intervention as much as possible.
-\item It must provide elasticity, meaning it automatically provisions virtual machines according to the workload.
-\item Request made to the system must be equally distributed over virtual machines. The system will have a load balancer to ensure this.
-\item It must be reliable, we take into consideration that individual machines might fail and take precautions to recover.
-\item Resource usage and performance of the system must be recorded en be observable to system administrators.
-\end{itemize}
+\input{sections/background}
 
 %------------------------------------------------
 
 \section{System Design}
+\input{sections/system}
 
-\includegraphics[width=0.5\textwidth]{img/arch}
-
-System Design (recommended size: 1.5 pages)
-\begin{enumerate}[(a)]
-\item Resource Management Architecture: describe the design of your system,
-including the inter-operation of the provisioning, allocation, reliability, and monitoring components (which correspond to the homonym features required by the WantCloud CTO).
-\item System Policies: describe the policies your system uses and supports. The latter may remain not implemented throughout your coursework, as long as you can explain how they can be supported in the future.
-\item (Optional) Additional System Features: describe each additional feature of your system, one sub-section per feature.
-\end{enumerate}
-
-The load balancer has the following interface:
-\begin{itemize}
-\item \emph{GET:/solution/<puzzle>} Retrieve a completely filled in Sudoku of <puzzle>.
-\item \emph{GET:/instances} Monitoring, gives a list of all solver machines and their workloads.
-\item \emph{GET:/count} Monitoring, gives a overview of the number of puzzles each solver machine has solved.
-\end{itemize}
 %------------------------------------------------
 
 \section{Experimental Results}
-Experimental Results (recommended size: 1.5 pages)
-\begin{enumerate}[(a)]
-\item Experimental setup: describe the working environments (DAS, Amazon EC2,
-etc.), the general workload and monitoring tools and libraries, other tools and libraries you have used to implement and deploy your system, other tools and libraries used to conduct your experiments.
-\item Experiments: describe the experiments you have conducted to analyze each system feature, then analyze them; use one sub-section per experiment. For each experiment, describe the workload, present the operation of the system, and analyze the results. In the analysis, report:
-\begin{enumerate}
-\item Charged-time = time that would have been charged using the Amazon EC2 timing approach (1-hour increments)
-\item Charged-cost = cost that would have been charged using the 3
-E
-Amazon EC2 charging approach, assuming 10 Euro-cents/charged hour
-\item Service metrics of the experiment, such as runtime and response time of
-the service, etc.
-\item (optional) Usage metrics of the experiment, such as per-VM and overall
-system usage and activity.
-\end{enumerate}
-\end{enumerate}
-We evaluate the performance of \appName by running it on the Amazon EC2 cloud,which provides a web interface through which images for virtual machines can be created, managed, and launched. We create one image containing our load balancer and one image containing code for the solver machine. We need to launch only the load balancer image, which will launch solver instances on its own depending on workload. In the instance overview of the EC2 web interface we can find the IP address of the machines so we can make Sudoku request to the load balancer. 
+\input{sections/experiments}
 
-The workload is generated by a Java program running locally on our own machines. It contains a large list of partially completed puzzles. Within random intervals the program selects a random puzzle from the list a makes a GET request to the load balancer.   
-The workload program is multithreaded to allow new requests to be made while others are still active. Alongside the workload generation there is a monitoring thread which inspects and logs data from the load balancer such as the number of active machines and resource usage.
-
-Experimenten, de system features moeten getest worden:
-\begin{itemize}
-\item Elastic: grafiek dat van \#machines en workload over tijd, lat zien meer work -> meer machines
-\item Response time: de user hoeft nooit lang te wachten
-\item Meerdere machines en dan plots van de workloads voor load balancing. Dat we laten zien dat het goed verdeeld word.
-\item Reliable. Weet niet wat voor experiment we hier voor willen doen
-\end{itemize}
 %------------------------------------------------
 
 \section{Discussion}
-Discussion (recommended size: 1 page): summarize the main findings of your work and discuss the tradeoffs inherent in the design of cloud-computing-based applications. Should the WantCloud CTO use IaaS-based clouds? Among others, use extrapolation of the results as reported in Section 6.b of the report, to discuss the charged time and the charged cost for 100,000/1,000,000/10,000,000 users and for 1 day/1 month/1 year.
+\input{sections/discussion}
 
 %------------------------------------------------
 
 \section{Conclusion}
+\input{sections/conclusion}
 
 %------------------------------------------------
 
